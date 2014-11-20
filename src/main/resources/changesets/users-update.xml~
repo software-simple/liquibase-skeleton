@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd
+    http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+	<changeSet id="users.update.1" author="mehanika">
+		<!-- El atributo onFail indica que accion se tomara en caso de que la -->
+		<!-- precondición falle, en este caso si falla se continuará con los demás cambio -->
+		<preConditions onFail="CONTINUE">
+			<!-- Se verifica que exista la columna "username" de la tabla "Users"-->
+                	<columnExists columnName="username" tableName="Users"/>
+		</preConditions> 
+		<!-- Si la precondición se cumple entonces se actualizara el tipo de dato -->
+		<!-- de la columna "username" -->
+		<modifyDataType
+		    columnName="username"
+		    newDataType="varchar(50)"
+		    tableName="Users"/>
+   
+ 	</changeSet>
+
+
+	<changeSet id="users.update.2" author="mehanika">
+		<!-- El atributo onFail indica que accion se tomara en caso de que la -->
+		<!-- precondición falle, en este caso si falla se continuará con los demás cambio -->
+		<preConditions onFail="CONTINUE">
+			<!-- Se verifica que exista la columna "username" de la tabla "Users"-->
+                	<columnExists columnName="username" tableName="Users"/>
+		</preConditions> 
+		<!-- Si la precondición se cumple entonces se actualizara el tipo de dato -->
+		<!-- de la columna "username", solo que en esta caso utilizaremos SQL -->
+		<sql endDelimiter="\nGO" splitStatements="true" stripComments="true">
+			ALTER TABLE Users
+			MODIFY COLUMN username varchar(40)
+		</sql>
+   
+ 	</changeSet>
+	
+
+</databaseChangeLog>
